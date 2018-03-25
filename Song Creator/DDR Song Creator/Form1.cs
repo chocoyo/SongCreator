@@ -32,6 +32,7 @@ namespace DDR_Song_Creator
         private StreamWriter leftStream;   //File Stream
         private StreamWriter rightStream;   //File Stream
         private Stopwatch stopWatch;
+        private string audioFileName;
         private string fileName;
         private string songName;
 
@@ -44,6 +45,13 @@ namespace DDR_Song_Creator
             stopWatch = new Stopwatch();
         }
 
+        private void generateName() {
+            fileName = audioFileName + " " + DateTime.Now.ToString("h.mm.ss");//Make File Name
+            upStream = new StreamWriter(fileName + "UP.txt");//Load File Stream
+            downStream = new StreamWriter(fileName + "DOWN.txt");//Load File Stream
+            leftStream = new StreamWriter(fileName + "LEFT.txt");//Load File Stream
+            rightStream = new StreamWriter(fileName + "RIGHT.txt");//Load File Stream
+        }
         private void button1_Click(object sender, EventArgs e)
         {
             string path = "";       //Path To The File
@@ -56,19 +64,21 @@ namespace DDR_Song_Creator
                 file = openFileDialog1.SafeFileName;
                 file = file.Replace(".wav", "");//Get Filename
             }
+            else
+            {
+                MessageBox.Show("Please Enter Valid Audio File");
+                return;
+            }
 
-            songName = file;
+            audioFileName = file;
             label2.Text = path;//Update Lable
             player = new SoundPlayer(path);//Load Sound Player
-            fileName = file + " " + DateTime.Now.ToString("h.mm.ss");//Make File Name
-            upStream = new StreamWriter(fileName + "UP.txt");//Load File Stream
-            downStream = new StreamWriter(fileName + "DOWN.txt");//Load File Stream
-            leftStream = new StreamWriter(fileName + "LEFT.txt");//Load File Stream
-            rightStream = new StreamWriter(fileName + "RIGHT.txt");//Load File Stream
+            generateName();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            generateName();
             stopWatch.Start();
             player.Play();
         }
