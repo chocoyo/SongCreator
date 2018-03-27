@@ -26,11 +26,11 @@ namespace DDR_Song_Creator
 {
     public partial class Form1 : Form
     {
-        private SoundPlayer player;     //Media Player
-        private StreamWriter upStream;   //File Stream
+        private SoundPlayer player;        //Media Player
+        private StreamWriter upStream;     //File Stream
         private StreamWriter downStream;   //File Stream
         private StreamWriter leftStream;   //File Stream
-        private StreamWriter rightStream;   //File Stream
+        private StreamWriter rightStream;  //File Stream
         private Stopwatch stopWatch;
         private string audioFileName;
         private string fileName;
@@ -71,7 +71,7 @@ namespace DDR_Song_Creator
             }
 
             audioFileName = file;
-            label2.Text = path;//Update Lable
+            label2.Text = file;//Update Lable
             player = new SoundPlayer(path);//Load Sound Player
             generateName();
         }
